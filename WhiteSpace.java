@@ -1,9 +1,11 @@
 import java.util.Stack;
-class Stack_manipulation {
+class CreateStack {
 	public Stack<Integer> s;
-	public Stack_manipulation() {
+	public CreateStack() {
 		s = new Stack<Integer>();
 	}
+}
+class Stack_manipulation extends CreateStack{
 	public void push(int num) {
 		s.push(num);
 	}
@@ -30,6 +32,20 @@ class Stack_manipulation {
 		s.push(top);
 	}
 }
+class Arithmetic extends CreateStack{
+	public void add() {
+		s.push((Integer)s.pop()+(Integer)s.pop());
+	}
+	public void subtract() {
+		s.push((Integer)s.pop()-(Integer)s.pop());
+	}
+	public void multiply() {
+		s.push((Integer)s.pop()*(Integer)s.pop());
+	}
+	public void divide() {
+		s.push((Integer)s.pop()/(Integer)s.pop());
+	}
+}
 public class WhiteSpace {
 	public static void main(String[] args) {
 		Stack_manipulation st = new Stack_manipulation();
@@ -48,5 +64,22 @@ public class WhiteSpace {
 		
 		st.swap();					//1,2,3,4,5,2,5
 		System.out.println(st.s);
+
+		System.out.println('\n');
+		Arithmetic a = new Arithmetic();
+		a.s.push(1);
+		a.s.push(2);
+		a.s.push(3);
+		a.s.push(4);
+		a.s.push(5);
+		a.add();
+		System.out.println(a.s);
+		a.subtract();
+		System.out.println(a.s);
+		a.multiply();
+		System.out.println(a.s);
+		a.divide();
+		System.out.println(a.s);
+
 	}
 }
