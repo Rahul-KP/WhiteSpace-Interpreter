@@ -49,6 +49,9 @@ class Arithmetic extends CreateStack{
 	public void divide() {
 		s.push((Integer)s.pop()/(Integer)s.pop());
 	}
+	public void modulo() {
+        s.push((Integer)s.pop()%(Integer)s.pop());
+    }
 }
 public class WhiteSpace {
 	public static void main(String[] args) {
