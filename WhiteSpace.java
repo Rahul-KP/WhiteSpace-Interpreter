@@ -26,10 +26,14 @@ class Stack_manipulation extends CreateStack{
 		s.pop();
 	}
 	public void slide(int n) {
+		//corner cases yet to covered if n>= size of stack
+		if(n < s.size()) {
 		Integer top = (Integer)s.pop();
+
 		for(int i=0;i<n;i++) 
 			this.discard();
 		s.push(top);
+		}
 	}
 }
 class Arithmetic extends CreateStack{
