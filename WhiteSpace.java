@@ -15,16 +15,50 @@ public class WhiteSpace {
 			int r = 0; // Variable to store every character read from the file (one at a time)
 
 			while((r = fis.read()) != -1) {
+
 				// System.out.print((char)r);
 				if(r == 32) { 
 					System.out.println("Stack Manipulation");
-					// Code to perform stack manipulation operations
+
+					r= fis.read(); // reading 2nd charcter
+					
+					if(r==32){
+						System.out.println("Push item into stack");
+					}
+
+					else if(r==9){
+						// check for sp,LN
+						r= fis.read(); // reading 3rd character
+						if(r==32){
+							System.out.println("Copy nth item onto the stack");
+						}
+						else if(r==10){
+							System.out.println("Sliding n item off the stack exect top ele");
+						}
+					}
+
+					else if(r==10){
+						r= fis.read(); // reading 3rd character
+						if(r==32){
+							System.out.println("Duplicate top");
+						}
+						else if(r==10){
+							System.out.println("Remove top ");
+						}
+						else if(r==9){
+							System.out.println("Swap 2 items");
+						}
+
+					}
+
+					
 				}
 
 				else if(r == 9) {
 					r = fis.read();
 					if(r == 32) {
 						System.out.println("Arithmetic");
+
 						// Code to perform arithmetic operations
 					} 
 					else if(r == 9) {
