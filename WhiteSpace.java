@@ -4,6 +4,9 @@ import java.io.FileReader;
 import java.io.*;  
 import java.io.IOException;  
 
+// spaces -> (0) 
+// tabs   -> (1)
+
 public class WhiteSpace {
 	public void parsing() {
 		try {
