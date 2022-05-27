@@ -7,7 +7,7 @@ import java.io.IOException;
 // spaces -> (0) -> +ve
 // tabs   -> (1) -> -ve
 
-public class WhiteSpace extends StackOperations {
+public class WhiteSpace {
 	public void parsing() {
 		try {
 			File f = new File("./nums.ws"); // File containing whitespace source code
@@ -31,8 +31,12 @@ public class WhiteSpace extends StackOperations {
 
 							// once u receive the a number -> x
 							// call push(x)
-						
-						sop.push(x);
+
+
+
+
+
+
 					}
 
 					else if(r==9){
@@ -41,24 +45,9 @@ public class WhiteSpace extends StackOperations {
 						if(r==32){
 							System.out.println("Copy nth item onto the stack");
 
-							// here x is the index position , value at that index is copied at the top of stack
-							int x = convert(fis);
-							System.out.println("The number/ index position is: "+ x);
-
-							// calling the stack operation
-							sop.copy(x);
-
 						}
 						else if(r==10){
 							System.out.println("Sliding n item off the stack exect top ele");
-
-							// x -> no of times to be slided off the stack
-							int x = convert(fis);
-
-							System.out.println("The number of items popped are: "+ x);
-							sop.slide(x);
-
-
 						}
 					}
 
@@ -84,27 +73,7 @@ public class WhiteSpace extends StackOperations {
 					if(r == 32) {
 						System.out.println("Arithmetic");
 
-						//reading 3rd character
-						r = fis.read();
-						if(r == 32){
-
-							r= fis.read()
-							if( r==32){
-								System.out.println("Addting");
-								
-							}
-							else if(r== 9){
-								System.out.println("Subtraction");
-							}
-							else if(r==10){
-								System.out.println("Multiplication");
-							}
-
-						}
-
 						// Code to perform arithmetic operations
-
-
 					} 
 					else if(r == 9) {
 						System.out.println("Heap Access");

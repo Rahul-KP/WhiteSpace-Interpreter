@@ -12,7 +12,12 @@ class Test {
 		File fn = new File("./nums.ws");
 		FileInputStream fb = new FileInputStream(fn);
 
-		int x = obj.convert(fb);
-		System.out.println("the number is: "+x);
+		// int x = obj.convert(fb);
+		// System.out.println("the number is: "+x);
+		obj.parsing();
+
+		StackOperations sop = new StackOperation();
+
+		Arithmetic aop = new Arithetic();
 	}
 }
