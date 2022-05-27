@@ -66,14 +66,17 @@ public class WhiteSpace extends StackOperations {
 						r= fis.read(); // reading 3rd character
 						if(r==32){
 							System.out.println("Duplicate top");
+
 							sop.duplicateTop();
 						}
 						else if(r==10){
 							System.out.println("Remove top");
+
 							sop.discard();
 						}
 						else if(r==9){
 							System.out.println("Swap 2 items");
+							
 							sop.swap();
 						}
 
