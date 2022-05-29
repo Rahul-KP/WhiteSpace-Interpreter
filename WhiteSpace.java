@@ -2,16 +2,33 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader; 
 import java.io.*;  
-import java.io.IOException;  
+import java.io.IOException;
 
 // spaces -> (0) -> +ve
 // tabs   -> (1) -> -ve
 
-public class WhiteSpace extends StackOperations {
+public class WhiteSpace{
+	
+	private FileInputStream fis;
+	public StackOperations sop;
+	public Arithmetic aop;
+	public WhiteSpace(String fname){
+		try{
+			File f = new File(fname); // File containing whitespace source code
+		fis = new FileInputStream(f);
+		}
+		catch(FileNotFoundException e){
+			System.out.println("File not found");
+		}
+		
+		sop = new StackOperations();
+
+	}
+
+
 	public void parsing() {
 		try {
-			File f = new File("./nums.ws"); // File containing whitespace source code
-			FileInputStream fis = new FileInputStream(f);
+
 			int r = 0; // Variable to store every character read from the file (one at a time)
 
 			while((r = fis.read()) != -1) {
@@ -94,7 +111,7 @@ public class WhiteSpace extends StackOperations {
 						r = fis.read();
 						if(r == 32){
 
-							r= fis.read()
+							r= fis.read();
 							if( r==32){
 								System.out.println("Addting");
 								aop.add();

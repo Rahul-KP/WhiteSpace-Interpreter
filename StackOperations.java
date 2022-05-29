@@ -1,9 +1,19 @@
+import java.util.Stack;
 
+public class StackOperations {
+	public Stack<Integer> s;
+	public StackOperations(){
+		s = new Stack<Integer>();
+	}
 
-public class StackOperations extends CreateStack{
 	public void push(int num) {
 		s.push(num);
 	}
+
+	public Integer pop(){
+		return (Integer)s.pop();
+	}
+
 	public void duplicateTop() {
 		s.push((Integer)s.peek());
 	}

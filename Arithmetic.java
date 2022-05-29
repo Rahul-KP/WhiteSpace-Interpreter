@@ -1,19 +1,25 @@
 
+public class Arithmetic {
 
-public class Arithmetic extends CreateStack{
+	private StackOperations s;
+	public Arithmetic(StackOperations s){
+
+		this.s = s;
+	}
+
 	public void add() {
-		s.push((Integer)s.pop()+(Integer)s.pop());
+		s.push(s.pop()+s.pop());
 	}
 	public void subtract() {
-		s.push((Integer)s.pop()-(Integer)s.pop());
+		s.push(s.pop()-s.pop());
 	}
 	public void multiply() {
-		s.push((Integer)s.pop()*(Integer)s.pop());
+		s.push(s.pop()*s.pop());
 	}
 	public void divide() {
-		s.push((Integer)s.pop()/(Integer)s.pop());
+		s.push(s.pop()/s.pop());
 	}
 	public void modulo() {
-        s.push((Integer)s.pop()%(Integer)s.pop());
+        s.push(s.pop()%s.pop());
     }
 }
