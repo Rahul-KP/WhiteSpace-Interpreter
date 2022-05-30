@@ -13,7 +13,9 @@ public class StackOperations {
 	public Integer pop(){
 		return (Integer)s.pop();
 	}
-
+	public int peek() {
+		return s.peek();
+	}
 	public void duplicateTop() {
 		s.push((Integer)s.peek());
 	}

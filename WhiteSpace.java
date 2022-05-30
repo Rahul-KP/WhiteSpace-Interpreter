@@ -10,6 +10,7 @@ import java.io.IOException;
 public class WhiteSpace{
 	
 	private FileInputStream fis;
+	public IO io;
 	public StackOperations sop;
 	public Arithmetic aop;
 	public WhiteSpace(String fname){
@@ -23,239 +24,95 @@ public class WhiteSpace{
 
 		sop = new StackOperations();
 		aop = new Arithmetic(this.sop);
+		io = new IO(this.sop);
 	}
 
 
 	public void parsing() {
+		int r = 0, tmp; // Variable to store every character read from the file (one at a time)
 		try {
-
-			int r = 0; // Variable to store every character read from the file (one at a time)
-
 			while((r = fis.read()) != -1) {
-
-				// System.out.print((char)r);
-				if(r == 32) { 
-					// first character = space
-					System.out.println("Stack Manipulation");
-
-					r= fis.read(); // reading 2nd charcter
-					
-					if(r==32){
-						// second character = space
-						System.out.println("Push item into stack");
-							
-							// here call convert function and pass the number ,
-						int x = convert(fis);
-						System.out.println("The number is: "+ x);
-
-							// once u receive the a number -> x
-							// call push(x)
-						
-						sop.push(x);
-					}
-
-					else if(r==9){
-						// second character = tab
-						// check for sp,LN
-						r= fis.read(); // reading 3rd character
-						if(r==32){
-							// third character = space
-							System.out.println("Copy nth item onto the stack");
-
-							// here x is the index position , value at that index is copied at the top of stack
-							int x = convert(fis);
-							System.out.println("The number/ index position is: "+ x);
-
-							// calling the stack operation
-							sop.copy(x);
-
+				switch(r) {
+					case 9: //tab
+						r = fis.read(); System.out.println(r);
+						switch(r) {
+							case 9: //tab - Heap operation
+							case 32: //space - Arithmetic operations
+								r = fis.read(); System.out.println(r);
+								switch(r) {
+									case 32:
+										r = fis.read(); System.out.println(r);
+										switch(r) {
+											case 9: //tab - Subtraction
+												System.out.println("Subtraction"); aop.subtract();  break;
+											case 10: //LF - Multiplication
+												System.out.println("Multiplication"); aop.multiply(); break;
+											case 32: //space - Addition
+												System.out.println("Addition"); aop.add(); break;
+										}
+										break;
+									case 9:
+										r = fis.read(); System.out.println(r);
+										switch(r) {
+											case 32: //Division
+												System.out.println("Division"); aop.divide(); break;
+											case 9: //Modulus
+												System.out.println("Modulus"); aop.modulo(); break;
+										}
+								}
+								break;
+							case 10: //LF - I/O operations
+								r = fis.read(); System.out.println(r);
+								System.out.println("I/O");
+								switch(r) {
+									case 32: //Output
+										r = fis.read(); System.out.println(r);
+										if(r == 32) 
+											io.outputChar();
+										else
+											io.outputInt();
+										break;
+									case 9: //Input
+										r = fis.read(); System.out.println(r);
+										io.input();
+										break;
+								}
+								break;
 						}
-						else if(r==10){
-							// third character = linefeed
-							System.out.println("Sliding n item off the stack exect top ele");
-
-							// x -> no of times to be slided off the stack
-							int x = convert(fis);
-
-							System.out.println("The number of items popped are: "+ x);
-							sop.slide(x);
-
-
+						break;
+					case 10: //LF
+					case 32: //space - Stack Manipulation
+						r = fis.read(); System.out.println(r);
+						switch(r) {
+							case 32: //push
+								System.out.println("Push");
+								tmp = this.convert(fis);
+								sop.push(tmp);
+								break;
+							case 10:
+								switch(r) {
+									case 9: //swap top
+										System.out.println("Swap top"); sop.swap(); break;
+									case 10: //discard top item
+										System.out.println("Discard top item"); sop.discard(); break;
+									case 32: //duplicate
+										System.out.println("Duplicate"); sop.duplicateTop(); break;
+								}
+								break;
+							case 9:
+								switch(r) {
+									case 32: //copy nth item to top
+										System.out.println("Copying nth item to top"); tmp = this.convert(fis); sop.copy(tmp); break;
+									case 10: //slide n items
+										System.out.println("Slide n items"); tmp = this.convert(fis); sop.slide(tmp); break;
+								}
 						}
-					}
-
-					else if(r==10){
-						// second character = linefeed
-						r= fis.read(); // reading 3rd character
-						if(r==32){
-							// third character = space
-							System.out.println("Duplicate top");
-
-							sop.duplicateTop();
-						}
-						else if(r==10){
-							// third character = linefeed
-							System.out.println("Remove top");
-
-							sop.discard();
-						}
-						else if(r==9){
-							//third character = tab
-							System.out.println("Swap 2 items");
-							
-							sop.swap();
-						}
-
-					}
-
-					
-				}
-
-				else if(r == 9) {
-					// first character = tab
-					r = fis.read();
-					if(r == 32) {
-						// second character = space
-						System.out.println("Arithmetic");
-
-						//reading 3rd character
-						r = fis.read();
-						if(r == 32){
-							// third character = space
-							r= fis.read();
-							if( r==32){
-								// fourth character = space
-								System.out.println("Addting");
-								aop.add();
-							}
-							else if(r== 9){
-								//fourth character = tab
-								System.out.println("Subtraction");
-								aop.subtract();
-							}
-							else if(r==10){
-								// fourth character = linefeed
-								System.out.println("Multiplication");
-								aop.multiply();
-							}
-
-						}
-						else if(r==9){
-							// third character = tab
-							r=fis.read();
-							if(r==32){
-								// fourth charcter = space
-								System.out.println("Divide");
-								aop.divide();
-							}
-							else if(r==9){
-								// fourth character = tab
-								System.out.println("Modulo");
-								aop.modulo();
-							}
-						}
-
-						// Code to perform arithmetic operations
-
-
-					} 
-					else if(r == 9) {
-						// second character = tab
-						System.out.println("Heap Access");
-						r = fis.read();
-						if(r == 32) {
-							// third character = space
-							System.out.println("Store in heap");
-						}
-						else if(r == 9) {
-							// third character = tab
-							System.out.println("Retrieve from heap");
-						}
-						// Code to perform heap operations
-					} 
-					else if(r == 10) {
-						// second character = linefeed
-						System.out.println("I/O");
-						r = fis.read();
-						if(r == 32) {
-							// third character = space
-							r = fis.read();
-							if(r == 32) {
-								// fourth character = space
-								System.out.println("Output character at top of stack");
-							}
-							else if( r == 9) {
-								// fourth character = tab
-								System.out.println("Output number at top of stack");
-							}
-						}
-						else if(r == 9) {
-							// third character = tab
-							r = fis.read();
-							if( r == 32) {
-								// fourth character = space
-								System.out.println("Read character place location given by top");
-							}
-							else if( r == 9) {
-								// fourth character = tab
-								System.out.println("Read number placed location given by top"); 
-							}
-						}
-						// Code to perform i/o operations
-					} 
-				}
-
-				else if(r==10) {
-					// first character = linefeed
-					System.out.println("FLow Control");
-					r = fis.read();
-					if(r == 32) {
-						// second character = space
-						r = fis.read();
-						if(r == 32) {
-							// third character = space
-							System.out.println("Mark location taking a label as a parameter");
-						}
-						else if(r == 9) {
-							// third character = tab
-							System.out.println("Call subroutine taking a label as a parameter");
-						}
-						else if(r == 10) {
-							// third character = linefeed
-							System.out.println("Jump to label taking a label as a parameter");
-						}
-					}
-					else if(r == 9) {
-						// second character = tab
-						r = fis.read();
-						if(r == 32) {
-							// third character = space
-							System.out.println("Jump to label if top of stack is zero taking a label as parameter");
-						}
-						else if(r == 9) {
-							// third character = tab
-							System.out.println("Jump to label if top of stack is negative taking a label as parameter");
-						}
-						else if(r == 10) {
-							// third character = linefeed
-							System.out.println("End subroutine and transfer control back to caller");
-						}
-					}
-					else if(r == 10) {
-						// second character = linefeed
-						r = fis.read();
-						if(r == 10) {
-							// third character = linefeed
-							System.out.println("End program");
-						}
-					}
-					// Code to perform flow control operations
+						break;
 				}
 			}
 		}
-		
 		catch (IOException e) {
-			System.out.println("Could not read the file");
+			System.out.println(e);
 		}
 	}
 
