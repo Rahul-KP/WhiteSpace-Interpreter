@@ -26,14 +26,14 @@ class Test {
 	}
 
 	public static void main(String[] args)throws Exception {
-		WhiteSpace obj = new WhiteSpace("./nums.ws");
+		WhiteSpace obj = new WhiteSpace("./add.ws");
 		// obj.parsing();
 
 		// int x = obj.convert(fb);
 		// System.out.println("the number is: "+x);
-		// obj.parsing();
+		obj.parsing();
 
-		testStack(obj.sop);
+		// testStack(obj.sop);
 
 	}
 }

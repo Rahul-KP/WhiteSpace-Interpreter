@@ -20,9 +20,9 @@ public class WhiteSpace{
 		catch(FileNotFoundException e){
 			System.out.println("File not found");
 		}
-		
-		sop = new StackOperations();
 
+		sop = new StackOperations();
+		aop = new Arithmetic(this.sop);
 	}
 
 
@@ -253,9 +253,7 @@ public class WhiteSpace{
 				}
 			}
 		}
-		catch (FileNotFoundException e) {
-			System.out.println("The file specified was not found");
-		}
+		
 		catch (IOException e) {
 			System.out.println("Could not read the file");
 		}
@@ -271,7 +269,7 @@ public class WhiteSpace{
 		boolean positive = true; // Assuming the number to be positive by default
 		StringBuilder sb = new StringBuilder(); 
 		r = fis.read();
-		System.out.println("this is r : "+ r);
+		// System.out.println("this is r : "+ r);
 
 		if(r == 9) {
 			// negative
