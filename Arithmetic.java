@@ -1,4 +1,3 @@
-
 public class Arithmetic {
 
 	private StackOperations s;

@@ -4,7 +4,6 @@ import java.io.FileReader;
 import java.io.*;  
 import java.io.IOException; 
 
-
 class Test {
 
 	public static void testStack(StackOperations st){
@@ -27,20 +26,6 @@ class Test {
 
 	public static void main(String[] args)throws Exception {
 		WhiteSpace obj = new WhiteSpace(args[0]);
-		// obj.parsing();
-		// File f = new File(args[0]); // File containing whitespace source code
-		// FileInputStream fis = new FileInputStream(f);
-		// // int x = obj.convert(fb);
-		// // System.out.println("the number is: "+x);
-		// int r = 0;
-		// while((r = fis.read()) != -1) {
-		// 	// System.out.print(r + " ");
-		// }
 		obj.parsing();
-
-		// testStack(obj.sop);
-
 	}
 }
-
-
