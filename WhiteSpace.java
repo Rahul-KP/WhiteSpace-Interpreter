@@ -34,46 +34,46 @@ public class WhiteSpace{
 			while((r = fis.read()) != -1) {
 				switch(r) {
 					case 9: //tab
-						r = fis.read(); System.out.println(r);
+						r = fis.read();
 						switch(r) {
 							case 9: //tab - Heap operation
 							case 32: //space - Arithmetic operations
-								r = fis.read(); System.out.println(r);
+								r = fis.read();
 								switch(r) {
 									case 32:
-										r = fis.read(); System.out.println(r);
+										r = fis.read();
 										switch(r) {
 											case 9: //tab - Subtraction
-												System.out.println("Subtraction"); aop.subtract();  break;
+												System.out.println("Subtraction of first two elements of the stack"); aop.subtract();  break;
 											case 10: //LF - Multiplication
-												System.out.println("Multiplication"); aop.multiply(); break;
+												System.out.println("Multiplication of first two elements of the stack"); aop.multiply(); break;
 											case 32: //space - Addition
-												System.out.println("Addition"); aop.add(); break;
+												System.out.println("Addition of first two elements of the stack"); aop.add(); break;
 										}
 										break;
 									case 9:
-										r = fis.read(); System.out.println(r);
+										r = fis.read();
 										switch(r) {
 											case 32: //Division
-												System.out.println("Division"); aop.divide(); break;
+												System.out.println("Division of first two elements of the stack"); aop.divide(); break;
 											case 9: //Modulus
-												System.out.println("Modulus"); aop.modulo(); break;
+												System.out.println("Modulus of first two elements of the stack"); aop.modulo(); break;
 										}
 								}
 								break;
 							case 10: //LF - I/O operations
-								r = fis.read(); System.out.println(r);
+								r = fis.read();
 								System.out.println("I/O");
 								switch(r) {
 									case 32: //Output
-										r = fis.read(); System.out.println(r);
+										r = fis.read();
 										if(r == 32) 
 											io.outputChar();
 										else
 											io.outputInt();
 										break;
 									case 9: //Input
-										r = fis.read(); System.out.println(r);
+										r = fis.read();
 										io.input();
 										break;
 								}
@@ -82,29 +82,32 @@ public class WhiteSpace{
 						break;
 					case 10: //LF
 					case 32: //space - Stack Manipulation
-						r = fis.read(); System.out.println(r);
+						r = fis.read();
 						switch(r) {
 							case 32: //push
-								System.out.println("Push");
+								
 								tmp = this.convert(fis);
 								sop.push(tmp);
+								System.out.println("Pushing : "+ tmp);
 								break;
 							case 10:
+								r = fis.read();
 								switch(r) {
 									case 9: //swap top
-										System.out.println("Swap top"); sop.swap(); break;
+										System.out.println("Swap top two  elements"); sop.swap(); break;
 									case 10: //discard top item
 										System.out.println("Discard top item"); sop.discard(); break;
 									case 32: //duplicate
-										System.out.println("Duplicate"); sop.duplicateTop(); break;
+										System.out.println("Duplicate the top item on the stack"); sop.duplicateTop(); break;
 								}
 								break;
 							case 9:
+								r = fis.read();
 								switch(r) {
 									case 32: //copy nth item to top
-										System.out.println("Copying nth item to top"); tmp = this.convert(fis); sop.copy(tmp); break;
+										tmp = this.convert(fis); sop.copy(tmp);System.out.println("Copying the element at index "+tmp +"on to top of the stack"); break;
 									case 10: //slide n items
-										System.out.println("Slide n items"); tmp = this.convert(fis); sop.slide(tmp); break;
+										 tmp = this.convert(fis); sop.slide(tmp);System.out.println("Slide " + tmp+" numbers of the stack"); break;
 								}
 						}
 						break;
