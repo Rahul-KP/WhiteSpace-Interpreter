@@ -1,0 +1,1 @@
+Execute : java Test "<Ws file name>".ws
